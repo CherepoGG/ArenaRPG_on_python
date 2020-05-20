@@ -1,3 +1,6 @@
+from Inventory import InventoryHero
+
+
 class Hero:
     def __init__(self):
         self.name = 'Richard'
@@ -9,6 +12,7 @@ class Hero:
         self.damage = 10
         self.atk = ""
         self.defence = ""
+        self.inventory = InventoryHero()
 
     def attack(self, enemy):
         enemy.hp -= self.damage

@@ -7,23 +7,22 @@ class BaseWeapons:
 
 
 class WeaponInfo(BaseWeapons):
-    base_weapons = BaseWeapons()
 
-    def chopping_stats(self, base_weapons):
-        if base_weapons.type_weapons == self.type_weapon[0]:
+    def chopping_stats(self, weapon):
+        if weapon == 'Топор':
             self.type = self.type_weapon[0]
             self.name = 'Топор'
             self.damage = 4
-        elif base_weapons.type_weapons == self.type_weapon[1]:
+        if weapon == 'Меч':
             self.type_weapon = self.type_weapon[1]
             self.name = 'Меч'
             self.damage = 6
-        elif base_weapons.type_weapons == self.type_weapon[2]:
+        if weapon == 'Молот':
             self.type_weapon = self.type_weapon[2]
             self.name = 'Молот'
             self.damage = 8
-        elif base_weapons.type_weapons == self.type_weapon[3]:
+        if weapon == 'Копье':
             self.type_weapon = self.type_weapon[3]
             self.name = 'Копье'
             self.damage = 10
-
+        return self.name

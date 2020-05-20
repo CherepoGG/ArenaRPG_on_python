@@ -69,4 +69,3 @@ class ArmorInfo(BaseArmor):
             self.part_armor = self.equipment_part[3]
             self.name = 'Стальные поножи'
             self.defend = 6
-

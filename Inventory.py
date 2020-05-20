@@ -1,7 +1,13 @@
-from Hero import Hero
-
-
-class InventoryHero(Hero):
+class InventoryHero:
     def __init__(self):
-        super().__init__()
-        self.inventory = [1, 2, 3]
+        self.inventory = []
+        self.limit = 10
+
+    def add_object(self, subject):
+        if self.limit <= 9:
+            self.inventory.append(subject)
+        else:
+            print("Ваш инвентарь полон")
+
+    def delete_object(self, subject):
+        self.inventory.pop(subject)

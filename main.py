@@ -4,12 +4,15 @@ from Hero import Hero
 
 from Inventory import InventoryHero
 
+from weapons import WeaponInfo
+
 from Enemy import Enemy
 
 from EnemyGenerator import EnemyGenerator
 
 generate_enemy = EnemyGenerator()
 player = Hero()
+weapon = WeaponInfo()
 
 
 def check_winner(player, enemy):
@@ -80,5 +83,5 @@ def choice_enemy():
 
 
 choice_enemy()
-
-print(player.inventory[0])
+current_weapon = weapon.chopping_stats('cutting', 'Меч')
+print(current_weapon.damage)
