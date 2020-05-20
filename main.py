@@ -2,6 +2,8 @@ import random
 
 from Hero import Hero
 
+from Inventory import InventoryHero
+
 from Enemy import Enemy
 
 from EnemyGenerator import EnemyGenerator
@@ -78,3 +80,5 @@ def choice_enemy():
 
 
 choice_enemy()
+
+print(player.inventory[0])

@@ -2,7 +2,7 @@ class BaseArmor:
     def __init__(self):
         self.equipment_part = ['helmet', 'chest', 'arms', 'legs']
         self.class_equipment_part = ['light', 'middle', 'heavy']
-        self.name = ""
+        self.name = ''
         self.defend = 0
         self.part_armor = ''
 
@@ -69,3 +69,4 @@ class ArmorInfo(BaseArmor):
             self.part_armor = self.equipment_part[3]
             self.name = 'Стальные поножи'
             self.defend = 6
+

@@ -26,3 +26,4 @@ class WeaponInfo(BaseWeapons):
             self.type_weapon = self.type_weapon[3]
             self.name = 'Копье'
             self.damage = 10
+
