@@ -91,15 +91,23 @@ def choice_enemy():
 choice_enemy()
 
 
-def equipment_hero(item):
+def equipment_item(item):
     current_item = item
     player.equip_item(current_item, player)
 
 
+def remove_item(item):
+    player.remove_item(item)
+
+
 print('Инвентарь:', player.inventory.inventory)
 
-equipment_hero(weapon)
+equipment_item(weapon)
 
 print('Броня:', player.equipment.armor, 'Оружие:', player.equipment.weapon)
+
+print('Инвентарь:', player.inventory.inventory)
+
+remove_item(weapon)
 
 print('Инвентарь:', player.inventory.inventory)

@@ -54,5 +54,13 @@ class Hero:
             self.equipment.armor = item
             self.inventory.delete_item(player)
 
+    def remove_item(self, item):  # Будет кнопка, вызывающая эту функцию напротив каждого предмета экипировки
+        if item == self.equipment.armor:
+            self.equipment.armor = 'Не надето'
+            self.inventory.inventory.append(item)
+        elif item == self.equipment.weapon:
+            self.equipment.weapon = 'Не надето'
+            self.inventory.inventory.append(item)
+
     def restore_hero(self):
         self.hp = self.max_hp
