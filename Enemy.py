@@ -6,7 +6,7 @@ class Enemy:
         self.damage = 10
         self.exp_reward = 10
         self.atk = ""
-        self.defence = ""
+        self.defend = ""
 
     def attack(self, enemy):
         enemy.hp -= self.damage

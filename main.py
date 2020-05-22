@@ -2,9 +2,9 @@ import random
 
 from Hero import Hero
 
-from Inventory import InventoryHero
+from weapons import Weapon
 
-from weapons import WeaponInfo
+from armor import Armor
 
 from Enemy import Enemy
 
@@ -12,13 +12,19 @@ from EnemyGenerator import EnemyGenerator
 
 generate_enemy = EnemyGenerator()
 player = Hero()
-weapon = WeaponInfo()
+
+reward_items = []
+weapon = Weapon()
+armor = Armor()
+reward_items.append(weapon)
+reward_items.append(armor)
 
 
 def check_winner(player, enemy):
     if enemy.hp <= 0:
         print("Вы победили!")
-        player.reward(enemy.exp_reward)
+        player.reward(enemy.exp_reward, reward_items)
+
     elif player.hp <= 0:
         print("Вы проиграли бой!")
         player.restore_hero()
@@ -40,8 +46,8 @@ def enemy_stage(enemy):
 def player_stage(player):
     player.atk = random.choice(body_parts)
     print(player.name, "бьет в", player.atk)  # для теста
-    player.defence = random.choice(body_parts)
-    print(player.name, "защищает", player.defence)  # для теста
+    player.defend = random.choice(body_parts)
+    print(player.name, "защищает", player.defend)  # для теста
     return player
 
 
@@ -49,13 +55,13 @@ def battle(player, enemy):
     while player.hp > 0 and enemy.hp > 0:
         player_stage(player)
         enemy_stage(enemy)
-        if player.atk == enemy.defence:
+        if player.atk == enemy.defend:
             print("Противник заблокировал удар, направленный в", player.atk)
         else:
             player.attack(enemy)
             print("Вы нанесли", enemy.name, player.damage, "Урона по его", player.atk + ".", "У", enemy.name,
                   "осталось", enemy.hp, "здоровья")
-        if enemy.atk == player.defence:
+        if enemy.atk == player.defend:
             print("Вы заблокировали удар, направленный в", enemy.atk)
         else:
             enemy.attack(player)
@@ -83,5 +89,17 @@ def choice_enemy():
 
 
 choice_enemy()
-current_weapon = weapon.chopping_stats('cutting', 'Меч')
-print(current_weapon.damage)
+
+
+def equipment_hero(item):
+    current_item = item
+    player.equip_item(current_item, player)
+
+
+print('Инвентарь:', player.inventory.inventory)
+
+equipment_hero(weapon)
+
+print('Броня:', player.equipment.armor, 'Оружие:', player.equipment.weapon)
+
+print('Инвентарь:', player.inventory.inventory)

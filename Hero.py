@@ -1,4 +1,6 @@
-from Inventory import InventoryHero
+from Inventory import Inventory
+
+from EquipmentHero import Equipment
 
 
 class Hero:
@@ -10,9 +12,10 @@ class Hero:
         self.exp = 0
         self._expForLvlUp = 30
         self.damage = 10
-        self.atk = ""
-        self.defence = ""
-        self.inventory = InventoryHero()
+        self.atk = ''
+        self.defend = ''
+        self.inventory = Inventory()
+        self.equipment = Equipment()
 
     def attack(self, enemy):
         enemy.hp -= self.damage
@@ -25,15 +28,31 @@ class Hero:
             self.max_hp += 10
             self.hp = self.max_hp
             self.damage += 5
-            print("Уровень повышен! Теперь ваш уровень:", self.lvl, "урон:", self.damage, "здоровье:", self.max_hp)
+            print('Уровень повышен! Теперь ваш уровень:', self.lvl, 'урон:', self.damage, 'здоровье:', self.max_hp)
 
     def _add_experience(self, count):
         self.exp += count
-        print("Получено опыта:", self.exp)
+        print('Получено опыта:', self.exp)
         self._check_lvl_up()
 
-    def reward(self, exp_reward):
+    def _add_item(self, item):
+        self.inventory.add_item(item)
+
+    # def _delete_item(self):
+    #     self.inventory.delete_item()
+
+    def reward(self, exp_reward, item):
         self._add_experience(exp_reward)
+        self._add_item(item)
+        print('Получен предмет:', item)
+
+    def equip_item(self, item, player):
+        if item.type == 'weapon':
+            self.equipment.weapon = item
+            self.inventory.delete_item(player)
+        elif item.type == 'armor':
+            self.equipment.armor = item
+            self.inventory.delete_item(player)
 
     def restore_hero(self):
         self.hp = self.max_hp
