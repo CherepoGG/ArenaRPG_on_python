@@ -16,6 +16,7 @@ class Hero:
         self.defend = ''
         self.inventory = Inventory()
         self.equipment = Equipment()
+        self.gold = 0
 
     def attack(self, enemy):
         enemy.hp -= self.damage
@@ -38,13 +39,15 @@ class Hero:
     def _add_item(self, item):
         self.inventory.add_item(item)
 
-    # def _delete_item(self):
-    #     self.inventory.delete_item()
+    def _add_gold(self, gold_reward):
+        self.gold += gold_reward
+        print('Получено золота:', gold_reward)
 
-    def reward(self, exp_reward, item):
+    def reward(self, exp_reward, gold_reward, item_reward):
         self._add_experience(exp_reward)
-        self._add_item(item)
-        print('Получен предмет:', item)
+        self._add_gold(gold_reward)
+        self._add_item(item_reward)
+        print('Получен предмет:', item_reward)
 
     def equip_item(self, item, player):
         if item.type == 'weapon':

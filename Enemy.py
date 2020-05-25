@@ -5,6 +5,7 @@ class Enemy:
         self.lvl = 1
         self.damage = 10
         self.exp_reward = 10
+        self.gold_reward = 0
         self.atk = ""
         self.defend = ""
 

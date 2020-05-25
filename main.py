@@ -23,7 +23,7 @@ reward_items.append(armor)
 def check_winner(player, enemy):
     if enemy.hp <= 0:
         print("Вы победили!")
-        player.reward(enemy.exp_reward, reward_items)
+        player.reward(enemy.exp_reward, enemy.gold_reward, reward_items)
 
     elif player.hp <= 0:
         print("Вы проиграли бой!")
