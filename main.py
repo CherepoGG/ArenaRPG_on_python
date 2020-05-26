@@ -6,8 +6,6 @@ from weapons import Weapon
 
 from armor import Armor
 
-from Enemy import Enemy
-
 from EnemyGenerator import EnemyGenerator
 
 generate_enemy = EnemyGenerator()
@@ -15,7 +13,7 @@ player = Hero()
 
 reward_items = []
 weapon = Weapon()
-armor = Armor()
+armor = Armor('Топор', 'head', 2, 'common', 5)
 reward_items.append(weapon)
 reward_items.append(armor)
 
@@ -23,7 +21,7 @@ reward_items.append(armor)
 def check_winner(player, enemy):
     if enemy.hp <= 0:
         print("Вы победили!")
-        player.reward(enemy.exp_reward, enemy.gold_reward, reward_items)
+        player.rewards.reward(player, enemy.exp_reward, enemy.gold_reward, reward_items)
 
     elif player.hp <= 0:
         print("Вы проиграли бой!")
@@ -93,21 +91,12 @@ choice_enemy()
 
 def equipment_item(item):
     current_item = item
-    player.equip_item(current_item, player)
+    player.equipment.equip_item(current_item, player)
 
 
 def remove_item(item):
-    player.remove_item(item)
+    player.equipment.remove_item(item, player)
 
 
-print('Инвентарь:', player.inventory.inventory)
 
-equipment_item(weapon)
 
-print('Броня:', player.equipment.armor, 'Оружие:', player.equipment.weapon)
-
-print('Инвентарь:', player.inventory.inventory)
-
-remove_item(weapon)
-
-print('Инвентарь:', player.inventory.inventory)

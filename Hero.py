@@ -1,6 +1,8 @@
 from Inventory import Inventory
 
-from EquipmentHero import Equipment
+from Equipment import Equipment
+
+from rewards import Rewards
 
 
 class Hero:
@@ -12,6 +14,7 @@ class Hero:
         self.exp = 0
         self._expForLvlUp = 30
         self.damage = 10
+        self.defence = 0
         self.atk = ''
         self.defend = ''
         self.inventory = Inventory()
@@ -31,39 +34,7 @@ class Hero:
             self.damage += 5
             print('Уровень повышен! Теперь ваш уровень:', self.lvl, 'урон:', self.damage, 'здоровье:', self.max_hp)
 
-    def _add_experience(self, count):
-        self.exp += count
-        print('Получено опыта:', self.exp)
-        self._check_lvl_up()
-
-    def _add_item(self, item):
-        self.inventory.add_item(item)
-
-    def _add_gold(self, gold_reward):
-        self.gold += gold_reward
-        print('Получено золота:', gold_reward)
-
-    def reward(self, exp_reward, gold_reward, item_reward):
-        self._add_experience(exp_reward)
-        self._add_gold(gold_reward)
-        self._add_item(item_reward)
-        print('Получен предмет:', item_reward)
-
-    def equip_item(self, item, player):
-        if item.type == 'weapon':
-            self.equipment.weapon = item
-            self.inventory.delete_item(player)
-        elif item.type == 'armor':
-            self.equipment.armor = item
-            self.inventory.delete_item(player)
-
-    def remove_item(self, item):  # Будет кнопка, вызывающая эту функцию напротив каждого предмета экипировки
-        if item == self.equipment.armor:
-            self.equipment.armor = 'Не надето'
-            self.inventory.inventory.append(item)
-        elif item == self.equipment.weapon:
-            self.equipment.weapon = 'Не надето'
-            self.inventory.inventory.append(item)
-
     def restore_hero(self):
         self.hp = self.max_hp
+
+    rewards = Rewards()
