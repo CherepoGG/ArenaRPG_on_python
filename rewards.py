@@ -2,7 +2,10 @@ from weapons import Weapon
 
 from armor import Armor
 
+from item import Item
+
 import random
+
 
 class Rewards:
     def _add_experience(self, player, count):
@@ -23,29 +26,15 @@ class Rewards:
         self._add_item(player, item_reward)
         print('Получен предмет:', item_reward)
 
-    def chance_item_drop(self, enemy):
+    def item_generate(self, player, enemy):
+        item = Item()
         random_count = random.randint(-1, 101)
-        if random_count == 0.5:
-            random_count *= enemy.battle_difficulty
-
-    def item_generate(self, enemy):
-        if enemy.battle_difficulty == 1:
-            random_count = random.randint(-1, 101)
-            random.choice(Armor, weapon)
-            if random_count >= 0.5 * enemy.battle_difficulty:
-                weapon = Weapon('Топор Титана', 100, 'легендарное', 10000)
-                armor = Armor('Шлем Титана', 'head', 50, 'легендарное', 50000)
-                random.choice(armor, weapon)
-            elif random_count >= 1 * enemy.battle_difficulty:
-                weapon = Weapon('Топор рыцаря', 75, 'редкое', 7500)
-                armor = Armor('Рыцарский шлем', 'head', 35, 'редкое', 35000)
-                random.choice(armor, weapon)
-            elif random_count >= 5 * enemy.battle_difficulty:
-                weapon = Weapon('Топор наемника', 40, 'необычное', 4000)
-                armor = Armor('Шлем наемника', 'head', 15, 'необычное', 15000)
-                random.choice(armor, weapon)
-            elif random_count >= 10 * enemy.battle_difficulty:
-                weapon = Weapon('Топор дровосека', 15, 'обычное', 1500)
-                armor = Armor('Кожаный шлем', 'head', 5, 'обычное', 5000)
-                random.choice(armor, weapon)
-        elif enemy.battle_difficulty == 2:
+        random_result = random.choice(Armor, Weapon)
+        if random_count >= 0.5 * enemy.battle_difficulty:
+            player.inventory.add_item(random_result(item.legendary, player.lvl))
+        elif random_count >= 1 * enemy.battle_difficulty:
+            player.inventory.add_item(random_result(item.rare, player.lvl))
+        elif random_count >= 5 * enemy.battle_difficulty:
+            player.inventory.add_item(random_result(item.magic, player.lvl))
+        elif random_count >= 10 * enemy.battle_difficulty:
+            player.inventory.add_item(random_result(item.common, player.lvl))
