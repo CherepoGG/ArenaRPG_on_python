@@ -1,22 +1,11 @@
-class Armor:
-    def __init__(self, name, part, defence, quality, cost):
-        self.name = name
-        self.type = 'armor'
-        self.part = part
-        self.defence = defence
-        self.quality = quality
-        self.cost = cost
+from item import Item
 
-    def up_stats(self, player):
-        if self.quality == 'обычное':
-            self.defence = 1 * player.lvl
-            self.cost = 5 * player.lvl
-        elif self.quality == 'необычное':
-            self.defence = 2 * player.lvl
-            self.cost = 10 * player.lvl
-        elif self.quality == 'редкое':
-            self.defence = 3 * player.lvl
-            self.cost = 15 * player.lvl
-        elif self.quality == 'легендарное':
-            self.defence = 5 * player.lvl
-            self.cost = 50 * player.lvl
+
+class Armor(Item):
+    def __init__(self, quality, lvl):
+        self.name = 'броня'
+        self.type = 'armor'
+        # self.part = part
+        self.defence = 1 * lvl * quality
+        self.quality = quality
+        self.cost = 5 * lvl * quality

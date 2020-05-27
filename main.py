@@ -12,10 +12,10 @@ generate_enemy = EnemyGenerator()
 player = Hero()
 
 reward_items = []
-weapon = Weapon()
-armor = Armor('Топор', 'head', 2, 'common', 5)
-reward_items.append(weapon)
-reward_items.append(armor)
+weapon_reward = Weapon('Топор', 4, 'common', 10)
+armor_reward = Armor('Шлем', 'head', 2, 'common', 5)
+reward_items.append(weapon_reward)
+reward_items.append(armor_reward)
 
 
 def check_winner(player, enemy):
@@ -96,7 +96,3 @@ def equipment_item(item):
 
 def remove_item(item):
     player.equipment.remove_item(item, player)
-
-
-
-
