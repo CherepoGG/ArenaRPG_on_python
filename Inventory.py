@@ -7,8 +7,7 @@ class Inventory:
     def add_item(self, item):
         if self.current_limit <= self.limit - 1:
             self.current_limit += 1
-            for i in item:
-                self.inventory.append(i)
+            self.inventory.append(item)
         else:
             print("Ваш инвентарь полон")
 

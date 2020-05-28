@@ -2,26 +2,19 @@ import random
 
 from Hero import Hero
 
-from weapons import Weapon
-
-from armor import Armor
-
 from EnemyGenerator import EnemyGenerator
+
 
 generate_enemy = EnemyGenerator()
 player = Hero()
-
-reward_items = []
-weapon_reward = Weapon('Топор', 4, 'common', 10)
-armor_reward = Armor('Шлем', 'head', 2, 'common', 5)
-reward_items.append(weapon_reward)
-reward_items.append(armor_reward)
+items_reward = []
+print(player.inventory.inventory)
 
 
 def check_winner(player, enemy):
     if enemy.hp <= 0:
         print("Вы победили!")
-        player.rewards.reward(player, enemy.exp_reward, enemy.gold_reward, reward_items)
+        player.rewards.reward(player, enemy.exp_reward, enemy.gold_reward, items_reward, enemy.battle_difficulty)
 
     elif player.hp <= 0:
         print("Вы проиграли бой!")
