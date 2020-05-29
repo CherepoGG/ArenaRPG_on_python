@@ -4,42 +4,55 @@ from Hero import Hero
 
 from EnemyGenerator import EnemyGenerator
 
-
 generate_enemy = EnemyGenerator()
 player = Hero()
 items_reward = []
-print(player.inventory.inventory)
 
 
 def check_winner(player, enemy):
     if enemy.hp <= 0:
-        print("Вы победили!")
+        print('Вы победили!')
         player.rewards.reward(player, enemy.exp_reward, enemy.gold_reward, items_reward, enemy.battle_difficulty)
 
     elif player.hp <= 0:
-        print("Вы проиграли бой!")
+        print('Вы проиграли бой!')
         player.restore_hero()
-        print("Воскрешение героя...")
+        print('Воскрешение героя...')
 
 
-body_parts = ["head", "body", "arms", "legs"]
-enemy_difficult = ["light", "medium", "hard", "boss"]
+body_parts = ['head', 'body', 'arms', 'legs']
+enemy_difficult = ['light', 'medium', 'hard', 'boss']
 
 
 def enemy_stage(enemy):
     enemy.atk = random.choice(body_parts)
-    print(enemy.name, "бьет в", enemy.atk)  # для теста
+    print(enemy.name, 'бьет в', enemy.atk)  # для теста
     enemy.defence = random.choice(body_parts)
-    print(enemy.name, "защищает", enemy.defence)  # для теста
+    print(enemy.name, 'защищает', enemy.defence)  # для теста
     return enemy
 
 
 def player_stage(player):
     player.atk = random.choice(body_parts)
-    print(player.name, "бьет в", player.atk)  # для теста
+    print(player.name, 'бьет в', player.atk)  # для теста
     player.defend = random.choice(body_parts)
-    print(player.name, "защищает", player.defend)  # для теста
+    print(player.name, 'защищает', player.defend)  # для теста
     return player
+
+
+def check_armor(enemy):
+    enemy_damage = enemy.attack(player)
+    if player.equipment.head != 'Не надето':
+        enemy_damage / 100 * 25
+    elif player.equipment.body != 'Не надето':
+        enemy_damage = enemy.attack(player)
+        enemy_damage / 100 * 50
+    elif player.equipment.arms != 'Не надето':
+        enemy_damage = enemy.attack(player)
+        enemy_damage / 100 * 10
+    elif player.equipment.legs != 'Не надето':
+        enemy_damage = enemy.attack(player)
+        enemy_damage / 100 * 15
 
 
 def battle(player, enemy):
@@ -47,24 +60,25 @@ def battle(player, enemy):
         player_stage(player)
         enemy_stage(enemy)
         if player.atk == enemy.defend:
-            print("Противник заблокировал удар, направленный в", player.atk)
+            print('Противник заблокировал удар, направленный в', player.atk)
         else:
+            check_armor(enemy)
             player.attack(enemy)
-            print("Вы нанесли", enemy.name, player.damage, "Урона по его", player.atk + ".", "У", enemy.name,
-                  "осталось", enemy.hp, "здоровья")
+            print('Вы нанесли', enemy.name, player.damage, 'Урона по его', player.atk + '.', 'У', enemy.name,
+                  'осталось', enemy.hp, 'здоровья')
         if enemy.atk == player.defend:
-            print("Вы заблокировали удар, направленный в", enemy.atk)
+            print('Вы заблокировали удар, направленный в', enemy.atk)
         else:
             enemy.attack(player)
-            print("Противник нанес вам", enemy.damage, "урона по", enemy.atk + ".", "У вас осталось", player.hp,
-                  "здоровья")
+            print('Противник нанес вам', enemy.damage, 'урона по', enemy.atk + '.', 'У вас осталось', player.hp,
+                  'здоровья')
     check_winner(player, enemy)
 
 
 def choice_enemy():
-    print("Выберите противника:")
+    print('Выберите противника:')
     player_choice = enemy_difficult[0]
-    print("Вы выбрали", player_choice)
+    print('Вы выбрали', player_choice)
     if player_choice == enemy_difficult[0]:
         enemy = generate_enemy.generate(player.lvl, generate_enemy.LIGHT)
         battle(player, enemy)
@@ -80,12 +94,3 @@ def choice_enemy():
 
 
 choice_enemy()
-
-
-def equipment_item(item):
-    current_item = item
-    player.equipment.equip_item(current_item, player)
-
-
-def remove_item(item):
-    player.equipment.remove_item(item, player)

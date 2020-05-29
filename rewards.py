@@ -31,19 +31,35 @@ class Rewards:
     def item_generate(self, player, battle_difficulty):
         item = Item()
         random_count = random.uniform(0.0, 100.0)
-        print(random_count)
-        items = [Armor(item.common, player.lvl), Weapon(item.common, player.lvl)]
+        part_armor = ['head', 'body', 'arms', 'legs']
+        print(random_count)     # testing
+        items = [Armor, Weapon]
         random_item = random.choice(items)
-        print('генерир. шмот:', random_item)
-        if random_count <= 0.5 * battle_difficulty:
-            item_reward = random_item
-            return item_reward
-        elif random_count <= 1 * battle_difficulty:
-            item_reward = random_item
-            return item_reward
-        elif random_count <= 5 * battle_difficulty:
-            item_reward = random_item
-            return item_reward
-        elif random_count <= 100 * battle_difficulty:
-            item_reward = random_item
-            return item_reward
+        print('генерир. шмот:', random_item)  # testing
+        if random_item == Armor:
+            random_part_armor = random.choice(part_armor)
+            if random_count <= 0.5 * battle_difficulty:
+                item_reward = random_item(random_part_armor, item.legendary, player.lvl)
+                return item_reward
+            elif random_count <= 1 * battle_difficulty:
+                item_reward = random_item(random_part_armor, item.rare, player.lvl)
+                return item_reward
+            elif random_count <= 5 * battle_difficulty:
+                item_reward = random_item(random_part_armor, item.magic, player.lvl)
+                return item_reward
+            elif random_count <= 100 * battle_difficulty:
+                item_reward = random_item(random_part_armor, item.common, player.lvl)
+                return item_reward
+        else:
+            if random_count <= 0.5 * battle_difficulty:
+                item_reward = random_item(item.legendary, player.lvl)
+                return item_reward
+            elif random_count <= 1 * battle_difficulty:
+                item_reward = random_item(item.rare, player.lvl)
+                return item_reward
+            elif random_count <= 5 * battle_difficulty:
+                item_reward = random_item(item.magic, player.lvl)
+                return item_reward
+            elif random_count <= 10 * battle_difficulty:
+                item_reward = random_item(item.common, player.lvl)
+                return item_reward

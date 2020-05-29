@@ -15,5 +15,11 @@ class Inventory:
         for element in self.inventory:
             if element == player.equipment.weapon:
                 self.inventory.pop(self.inventory.index(element))
-            elif element == player.equipment.armor:
+            elif element == player.equipment.head:
+                self.inventory.pop(self.inventory.index(element))
+            elif element == player.equipment.body:
+                self.inventory.pop(self.inventory.index(element))
+            elif element == player.equipment.arms:
+                self.inventory.pop(self.inventory.index(element))
+            elif element == player.equipment.legs:
                 self.inventory.pop(self.inventory.index(element))
