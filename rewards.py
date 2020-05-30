@@ -21,7 +21,7 @@ class Rewards:
         player.gold += gold_reward
         print('Получено золота:', gold_reward)
 
-    def reward(self, player, exp_reward, gold_reward, item_reward, battle_difficulty):
+    def reward(self, player, exp_reward, gold_reward, battle_difficulty):
         self._add_experience(player, exp_reward)
         self._add_gold(player, gold_reward)
         item_reward = self.item_generate(player, battle_difficulty)
@@ -50,16 +50,34 @@ class Rewards:
             elif random_count <= 100 * battle_difficulty:
                 item_reward = random_item(random_part_armor, item.common, player.lvl)
                 return item_reward
-        else:
-            if random_count <= 0.5 * battle_difficulty:
-                item_reward = random_item(item.legendary, player.lvl)
-                return item_reward
-            elif random_count <= 1 * battle_difficulty:
-                item_reward = random_item(item.rare, player.lvl)
-                return item_reward
-            elif random_count <= 5 * battle_difficulty:
-                item_reward = random_item(item.magic, player.lvl)
-                return item_reward
-            elif random_count <= 10 * battle_difficulty:
-                item_reward = random_item(item.common, player.lvl)
-                return item_reward
+        # else:
+        #     if random_count <= 0.5 * battle_difficulty:
+        #         item_reward = random_item(item.legendary, player.lvl)
+        #         return item_reward
+        #     elif random_count <= 1 * battle_difficulty:
+        #         item_reward = random_item(item.rare, player.lvl)
+        #         return item_reward
+        #     elif random_count <= 5 * battle_difficulty:
+        #         item_reward = random_item(item.magic, player.lvl)
+        #         return item_reward
+        #     elif random_count <= 10 * battle_difficulty:
+        #         item_reward = random_item(item.common, player.lvl)
+        #         return item_reward
+
+    def give_armor(self, player, part_armor):   # testing
+        if part_armor == 'head':
+            head = Armor('head', Item.common, player.lvl)
+            self._add_item(player, head)
+        elif part_armor == 'body':
+            body = Armor('body', Item.common, player.lvl)
+            self._add_item(player, body)
+        elif part_armor == 'arms':
+            arms = Armor('arms', Item.common, player.lvl)
+            self._add_item(player, arms)
+        elif part_armor == 'legs':
+            legs = Armor('legs', Item.common, player.lvl)
+            self._add_item(player, legs)
+
+    def give_weapon(self, player):  # testing
+        weapon = Weapon('common', Item.common)
+        self._add_item(player, weapon)

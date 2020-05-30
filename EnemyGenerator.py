@@ -12,7 +12,7 @@ class EnemyGenerator:
         if enemy_type == self.LIGHT:
             enemy.hp = 25 + (lvl * 5)
             enemy.lvl = lvl
-            enemy.damage = 3 * lvl
+            enemy.damage = 10 * lvl
             enemy.exp_reward = 10 * lvl
             enemy.gold_reward = 3 * lvl
             enemy.battle_difficulty = 1

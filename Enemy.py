@@ -12,3 +12,4 @@ class Enemy:
 
     def attack(self, enemy):
         enemy.hp -= self.damage
+        return self.damage
