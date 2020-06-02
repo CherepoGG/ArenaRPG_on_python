@@ -11,15 +11,8 @@ class Inventory:
         else:
             print("Ваш инвентарь полон")
 
-    def delete_item(self, player):
+    def delete_item(self, item):
         for element in self.inventory:
-            if element == player.equipment.weapon:
-                self.inventory.pop(self.inventory.index(element))
-            elif element == player.equipment.head:
-                self.inventory.pop(self.inventory.index(element))
-            elif element == player.equipment.body:
-                self.inventory.pop(self.inventory.index(element))
-            elif element == player.equipment.arms:
-                self.inventory.pop(self.inventory.index(element))
-            elif element == player.equipment.legs:
-                self.inventory.pop(self.inventory.index(element))
+            if element == item:
+                index_item = self.inventory.index(item)
+                self.inventory.pop(index_item)

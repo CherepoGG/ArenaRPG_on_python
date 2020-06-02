@@ -38,3 +38,58 @@ class Hero:
         self.hp = self.max_hp
 
     rewards = Rewards()
+
+    def equip_item(self, item):
+        if item.type == 'weapon':
+            self.equipment.weapon = item
+            self.inventory.delete_item(item)
+        elif item.type == 'armor':
+            if item.part == 'head':
+                self.equipment.head = item
+                self.inventory.delete_item(item)
+            elif item.part == 'body':
+                self.equipment.body = item
+                self.inventory.delete_item(item)
+            elif item.part == 'arms':
+                self.equipment.arms = item
+                self.inventory.delete_item(item)
+            elif item.part == 'legs':
+                self.equipment.legs = item
+                self.inventory.delete_item(item)
+
+    def remove_item(self, item):  # Будет кнопка, вызывающая эту функцию напротив каждого предмета экипировки
+        if item.type == 'armor':
+            if item == self.equipment.head:
+                self.equipment.head = ''
+                self.inventory.add_item(item)
+            elif item == self.equipment.body:
+                self.equipment.body = ''
+                self.inventory.add_item(item)
+            elif item == self.equipment.arms:
+                self.equipment.arms = ''
+                self.inventory.add_item(item)
+            elif item == self.equipment.legs:
+                self.equipment.legs = ''
+                self.inventory.add_item(item)
+        elif item == self.equipment.weapon:
+            self.equipment.weapon = ''
+            self.inventory.add_item(item)
+
+    def calculate_damage_by_armor(self, body_part, damage):
+        if body_part == 'head' and self.equipment.head:
+            damage -= damage / 100 * self.equipment.head.defence
+            print(damage)
+            return damage
+        elif body_part == 'body' and self.equipment.body:
+            damage -= damage / 100 * self.equipment.body.defence
+            print(damage)
+            return damage
+        elif body_part == 'arms' and self.equipment.arms:
+            damage -= damage / 100 * self.equipment.arms.defence
+            print(damage)
+            return damage
+        elif body_part == 'legs' and self.equipment.legs:
+            damage -= damage / 100 * self.equipment.legs.defence
+            print(damage)
+            return damage
+        return damage

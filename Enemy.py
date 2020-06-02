@@ -10,6 +10,7 @@ class Enemy:
         self.atk = ''
         self.defend = ''
 
-    def attack(self, enemy):
-        enemy.hp -= self.damage
-        return self.damage
+    def attack(self, enemy, body_part):
+        damage = enemy.calculate_damage_by_armor(body_part, self.damage)
+        enemy.hp -= damage
+        return damage
