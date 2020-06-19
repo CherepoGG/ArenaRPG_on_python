@@ -2,7 +2,7 @@ from Inventory import Inventory
 
 from Equipment import Equipment
 
-from rewards import Rewards
+from Rewards import Rewards
 
 
 class Hero:
@@ -43,53 +43,119 @@ class Hero:
         if item.type == 'weapon':
             self.equipment.weapon = item
             self.inventory.delete_item(item)
+            print('Вы надели предмет:', item)
         elif item.type == 'armor':
             if item.part == 'head':
                 self.equipment.head = item
                 self.inventory.delete_item(item)
+                print('Вы надели предмет:', item)
             elif item.part == 'body':
                 self.equipment.body = item
                 self.inventory.delete_item(item)
+                print('Вы надели предмет:', item)
             elif item.part == 'arms':
                 self.equipment.arms = item
                 self.inventory.delete_item(item)
+                print('Вы надели предмет:', item)
             elif item.part == 'legs':
                 self.equipment.legs = item
                 self.inventory.delete_item(item)
+                print('Вы надели предмет:', item)
+
+    def check_slot_equipment(self, current_item):
+        if current_item.type == 'armor':
+            if current_item.part == 'head':
+                if self.equipment.head != '':
+                    return self.equipment.head
+                elif self.equipment.head == '':
+                    return 0
+            elif current_item.part == 'body':
+                if self.equipment.body != '':
+                    return self.equipment.body
+                elif self.equipment.body == '':
+                    return 0
+            elif current_item.part == 'arms':
+                if self.equipment.arms != '':
+                    return self.equipment.arms
+                elif self.equipment.arms == '':
+                    return 0
+            elif current_item.part == 'legs':
+                if self.equipment.legs != '':
+                    return self.equipment.legs
+                elif self.equipment.legs == '':
+                    return 0
+        elif current_item.type == 'weapon':
+            if self.equipment.weapon != '':
+                return self.equipment.weapon
+            elif self.equipment.weapon == '':
+                return 0
+
+    def equip_and_replace_equip(self, current_item):
+        equipment_item = self.check_slot_equipment(current_item)
+        if equipment_item == 0:
+            self.equip_item(current_item)
+        elif equipment_item != 0:
+            self.remove_item(equipment_item)
+            self.equip_item(current_item)
 
     def remove_item(self, item):  # Будет кнопка, вызывающая эту функцию напротив каждого предмета экипировки
         if item.type == 'armor':
             if item == self.equipment.head:
                 self.equipment.head = ''
                 self.inventory.add_item(item)
+                print('Вы сняли предмет:', item)
             elif item == self.equipment.body:
                 self.equipment.body = ''
                 self.inventory.add_item(item)
+                print('Вы сняли предмет:', item)
             elif item == self.equipment.arms:
                 self.equipment.arms = ''
                 self.inventory.add_item(item)
+                print('Вы сняли предмет:', item)
             elif item == self.equipment.legs:
                 self.equipment.legs = ''
                 self.inventory.add_item(item)
+                print('Вы сняли предмет:', item)
         elif item == self.equipment.weapon:
             self.equipment.weapon = ''
             self.inventory.add_item(item)
+            print('Вы сняли предмет:', item)
+
+    def calculate_stats(self, stat):
+        if stat == 'damage':
+            damage = self.damage + self.equipment.weapon
+            return damage
+        elif stat == 'armor':
+            head = 0
+            body = 0
+            arms = 0
+            legs = 0
+            if self.equipment.head:
+                head = self.equipment.head.defence
+            if self.equipment.body:
+                body = self.equipment.body.defence
+            if self.equipment.arms:
+                arms = self.equipment.arms.defence
+            if self.equipment.legs:
+                legs = self.equipment.legs.defence
+            return self.defence + head + body + arms + legs
 
     def calculate_damage_by_armor(self, body_part, damage):
+        armor_stats = self.calculate_stats('armor')
         if body_part == 'head' and self.equipment.head:
-            damage -= damage / 100 * self.equipment.head.defence
-            print(damage)
+            damage -= damage / 100 * armor_stats
+            print(damage)  # TODO: удалить после тестов
             return damage
         elif body_part == 'body' and self.equipment.body:
-            damage -= damage / 100 * self.equipment.body.defence
-            print(damage)
+            damage -= damage / 100 * armor_stats
+            print(damage)  # TODO: удалить после тестов
             return damage
         elif body_part == 'arms' and self.equipment.arms:
-            damage -= damage / 100 * self.equipment.arms.defence
-            print(damage)
+            damage -= damage / 100 * armor_stats
+            print(damage)  # TODO: удалить после тестов
             return damage
         elif body_part == 'legs' and self.equipment.legs:
-            damage -= damage / 100 * self.equipment.legs.defence
-            print(damage)
+            damage -= damage / 100 * armor_stats
+            print(damage)  # TODO: удалить после тестов
             return damage
         return damage
