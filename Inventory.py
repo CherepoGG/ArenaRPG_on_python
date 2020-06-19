@@ -9,7 +9,7 @@ class Inventory:
             self.current_limit += 1
             self.inventory.append(item)
         else:
-            print("Ваш инвентарь полон")
+            print('Ваш инвентарь полон')
 
     def delete_item(self, item):
         for element in self.inventory:

@@ -34,7 +34,7 @@ class Hero:
             self.damage += 5
             print('Уровень повышен! Теперь ваш уровень:', self.lvl, 'урон:', self.damage, 'здоровье:', self.max_hp)
 
-    def restore_hero(self):
+    def restore_hero(self):  # TODO: можно использовать для будущего лазарета
         self.hp = self.max_hp
 
     rewards = Rewards()
@@ -98,7 +98,7 @@ class Hero:
             self.remove_item(equipment_item)
             self.equip_item(current_item)
 
-    def remove_item(self, item):  # Будет кнопка, вызывающая эту функцию напротив каждого предмета экипировки
+    def remove_item(self, item):
         if item.type == 'armor':
             if item == self.equipment.head:
                 self.equipment.head = ''
@@ -144,18 +144,14 @@ class Hero:
         armor_stats = self.calculate_stats('armor')
         if body_part == 'head' and self.equipment.head:
             damage -= damage / 100 * armor_stats
-            print(damage)  # TODO: удалить после тестов
             return damage
         elif body_part == 'body' and self.equipment.body:
             damage -= damage / 100 * armor_stats
-            print(damage)  # TODO: удалить после тестов
             return damage
         elif body_part == 'arms' and self.equipment.arms:
             damage -= damage / 100 * armor_stats
-            print(damage)  # TODO: удалить после тестов
             return damage
         elif body_part == 'legs' and self.equipment.legs:
             damage -= damage / 100 * armor_stats
-            print(damage)  # TODO: удалить после тестов
             return damage
         return damage

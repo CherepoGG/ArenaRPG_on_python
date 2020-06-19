@@ -32,7 +32,7 @@ class Rewards:
         item = Item()
         random_count = random.uniform(0.0, 100.0)
         part_armor = ['head', 'body', 'arms', 'legs']
-        print(random_count)     # testing
+        print(random_count)  # testing
         items = [Armor, Weapon]
         random_item = random.choice(items)
         print('генерир. шмот:', random_item)  # testing
@@ -64,7 +64,7 @@ class Rewards:
                 item_reward = random_item(item.common, player.lvl)
                 return item_reward
 
-    def give_armor(self, player, part_armor, quality):   # testing
+    def give_armor(self, player, part_armor, quality):  # TODO: TESTING
         if quality == 1:
             quality = Item.common
         elif quality == 2:
@@ -86,6 +86,6 @@ class Rewards:
             legs = Armor('legs', quality, player.lvl)
             self._add_item(player, legs)
 
-    def give_weapon(self, player):  # testing
+    def give_weapon(self, player):  # TODO: TESTING
         weapon = Weapon('common', Item.common)
         self._add_item(player, weapon)

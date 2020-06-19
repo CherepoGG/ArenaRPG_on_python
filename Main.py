@@ -25,9 +25,9 @@ enemy_difficult = ['light', 'medium', 'hard', 'boss']
 
 def enemy_stage(enemy):
     enemy.atk = random.choice(body_parts)
-    print(enemy.name, 'бьет в', enemy.atk)  # testing
+    print(enemy.name, 'бьет в', enemy.atk)  # TODO: TESTING
     enemy.defence = random.choice(body_parts)
-    print(enemy.name, 'защищает', enemy.defence)  # testing
+    print(enemy.name, 'защищает', enemy.defence)  # TODO: TESTING
     return enemy
 
 
@@ -40,12 +40,6 @@ def player_stage(player):
 
 
 def battle(player, enemy):
-    player.rewards.give_armor(player, 'head', 1)  # testing
-    player.equip_item(player.inventory.inventory[0])  # testing
-    player.rewards.give_armor(player, 'head', 2)  # testing
-    player.equip_and_replace_equip(player.inventory.inventory[0])  # testing
-    print(player.inventory.inventory)  # TODO: TESTING
-    print(player.inventory.inventory[0].defence)
     while player.hp > 0 and enemy.hp > 0:
         player_stage(player)
         enemy_stage(enemy)
