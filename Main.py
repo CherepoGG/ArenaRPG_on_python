@@ -6,9 +6,6 @@ from EnemyGenerator import EnemyGenerator
 
 generate_enemy = EnemyGenerator()
 player = Hero()
-items_reward = []
-
-# TODO: Тестовое изменение 
 
 
 def check_winner(player, enemy):

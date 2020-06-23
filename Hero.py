@@ -20,6 +20,7 @@ class Hero:
         self.inventory = Inventory()
         self.equipment = Equipment()
         self.gold = 0
+        self.rewards = Rewards()
 
     def attack(self, enemy):
         enemy.hp -= self.damage
@@ -36,8 +37,6 @@ class Hero:
 
     def restore_hero(self):  # TODO: можно использовать для будущего лазарета
         self.hp = self.max_hp
-
-    rewards = Rewards()
 
     def equip_item(self, item):
         if item.type == 'weapon':
